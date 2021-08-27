@@ -1,0 +1,112 @@
+<form class="example-container" [formGroup]="form" #frmProfesor="ngForm" (ngSubmit)="operar()">
+
+    <div class="p-2">
+        <mat-card>
+            <mat-card-header fxLayoutAlign="center">
+                <mat-card-subtitle>
+                    <h2>{{ titulo }}</h2>
+                </mat-card-subtitle>
+            </mat-card-header>
+
+            <mat-card-content fxLayout="column" fxLayoutAlign="center">
+
+                <div [hidden]="true">
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="ID"  formControlName="id">
+                    </mat-form-field>
+                </div>
+
+                <mat-form-field class="example-full-width">
+                    
+                    <mat-label>Nombres</mat-label>
+                    <input matInput placeholder="Nombres" 
+                        formControlName="nombre">
+
+                    <mat-error *ngIf="form.get('nombre').hasError('required')">
+                        Nombre is <strong>required</strong>
+                    </mat-error>  
+                    <mat-error *ngIf="form.get('nombre').hasError('minlength') && !form.get('nombre').hasError('required')">
+                        Nombre debe tener minimo 3 caracteres
+                    </mat-error>     
+                    <mat-error *ngIf="form.get('nombre').hasError('maxlength') && !form.get('nombre').hasError('required')">
+                        Nombre debe tener maximo 25 caracteres
+                    </mat-error>                                     
+
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Apellidos" 
+                        formControlName="apellido">
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                    
+                    <mat-label>Correo</mat-label>
+                    <input matInput placeholder="@"   formControlName="correo"
+                        type="email">      
+                                 
+                     <mat-error *ngIf="form.get('correo').hasError('email') && !form.get('correo').hasError('required')">
+                                Please enter a valid email address
+                    </mat-error>
+                    <mat-error *ngIf="form.get('correo').hasError('required')">
+                        Email is <strong>required</strong>
+                    </mat-error>                      
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Tel"  formControlName="telefono">
+      
+                        <mat-error *ngIf="form.get('telefono').hasError('required')">
+                            Nombre is <strong>required</strong>
+                        </mat-error>  
+
+                        <mat-error *ngIf="form.get('telefono').errors?.validarInicalTel && !form.get('telefono').hasError('required')">
+                            Nombre is <strong>wrong</strong>
+                        </mat-error>  
+
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Usuario" formControlName="usuario">
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                    <mat-label>Contarsena</mat-label>
+                    <input matInput placeholder="Contrasena" formControlName="contrasena" type="password">
+
+
+                    <mat-error *ngIf="form.get('contrasena').hasError('required')">
+                        Nombre is <strong>required</strong>
+                    </mat-error>     
+                                  
+
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                    <mat-label>Repetir contrasena</mat-label>
+                    <input matInput placeholder="Repetir Contrasena" formControlName="contrasenaconf" type="password">
+
+                    <mat-error *ngIf="form.controls.contrasenaconf.hasError('required')">
+                        Nombre is <strong>required</strong>
+                    </mat-error>  
+                  
+                    <mat-error *ngIf="form.controls.contrasenaconf.hasError('NoPassswordMatch') && !form.controls.contrasenaconf.hasError('required')">
+                        <strong>Contrasenas no coinciden</strong>
+                    </mat-error>                     
+
+                </mat-form-field>               
+
+                <button mat-raised-button color="primary" type="submit" [disabled]="frmProfesor.invalid">
+                    <mat-icon>done</mat-icon>
+                    <span>Aceptar</span>
+                </button>
+                <button mat-raised-button color="accent" type="button" routerLink="/profesor">
+                    <mat-icon>close</mat-icon>
+                    <span>Cancelar</span>
+                </button>
+
+            </mat-card-content>
+        </mat-card>
+    </div>      
+
+</form>
